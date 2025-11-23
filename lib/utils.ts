@@ -47,7 +47,7 @@ export function compareBudget(
   my: MonthlyBudget,
   bench: BenchmarkData
 ): ComparisonResult[] {
-  const categories: (keyof MonthlyBudget)[] = [
+  const categories: (keyof BenchmarkData)[] = [
     'rent',
     'food',
     'transport',
@@ -61,7 +61,7 @@ export function compareBudget(
     const diffPct = benchVal > 0 ? (diff / benchVal) * 100 : 0;
 
     return {
-      category,
+      category: category as keyof MonthlyBudget,
       myVal,
       benchVal,
       diff,
