@@ -47,7 +47,7 @@ export function compareBudget(
   my: MonthlyBudget,
   bench: BenchmarkData
 ): ComparisonResult[] {
-  const categories: (keyof BenchmarkData)[] = [
+  const categories: Array<keyof BenchmarkData> = [
     'rent',
     'food',
     'transport',
@@ -55,7 +55,8 @@ export function compareBudget(
   ];
 
   return categories.map((category) => {
-    const myVal = my[category];
+    // category는 BenchmarkData와 MonthlyBudget 둘 다에 있는 키만 사용
+    const myVal = my[category as keyof MonthlyBudget];
     const benchVal = bench[category];
     const diff = myVal - benchVal;
     const diffPct = benchVal > 0 ? (diff / benchVal) * 100 : 0;
